@@ -38,7 +38,11 @@ describe Oystercard do
     it 'allows the user to touch in' do
       expect(subject).to respond_to(:touch_in)
     end
-
+    it "changes @status of Oystercard to 'true' ('in journey')" do
+      subject.touch_in
+      expect(subject.status).to eq(true)
+    end
+    
   end
 
 end
