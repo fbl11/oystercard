@@ -38,6 +38,10 @@ describe Oystercard do
     it "changes @status of Oystercard to 'true' ('in journey')" do
       expect(subject.touch_in).to eq(true)
     end
+
+    it 'raises error when @balance is below MINIMUM_BALANCE' do
+      expect { subject.touch_in }.to raise_error('Balance too low')
+    end
     
   end
 
