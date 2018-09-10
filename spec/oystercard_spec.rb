@@ -25,13 +25,20 @@ describe Oystercard do
   end
 
   describe '#deduct' do
-    it 'deducts the fare from @balance' do
-      expect(subject).to respond_to(:deduct).with(1).argument
-    end
+    
     it 'updates @balance after fare has been deducted' do
       fare = rand(1..5)
-      expect{subject.deduct(fare)}.to change{subject.balance}.by(fare)
+      expect{subject.deduct(fare)}.to change{subject.balance}.by(-fare)
     end
+
+  end
+
+  describe '#touch_in' do
+
+    it 'allows the user to touch in' do
+      expect(subject).to respond_to(:touch_in)
+    end
+
   end
 
 end

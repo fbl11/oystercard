@@ -36,4 +36,4 @@ I need my fare deducted from my card
 require './lib/oystercard.rb'
 card = Oystercard.new
 card.top_up(50)
-card.deduct_fare(5)
+card.deduct(5)
