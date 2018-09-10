@@ -62,7 +62,6 @@ describe Oystercard do
       expect(subject).not_to be_in_journey
     end
 
-
   end
 
 end
