@@ -46,9 +46,16 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
+
     it 'allows the user to touch out' do
       expect(subject).to respond_to(:touch_out)
     end
+
+    it "changes @status of Oystercard to 'false' ('not in journey')" do
+      subject.touch_in
+      expect(subject.status).to eq(false)
+    end
+
   end
 
 end
