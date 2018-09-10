@@ -17,3 +17,13 @@ card = Oystercard.new
 card.balance
 card.top_up(10)
 card.balance
+
+In order to protect my money from theft or loss
+As a customer
+I want a maximum limit (of £90) on my card
+
+# irb
+require './lib/oystercard.rb'
+card = Oystercard.new
+card.top_up(100)
+card.balance

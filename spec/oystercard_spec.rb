@@ -16,6 +16,10 @@ describe Oystercard do
       value = rand(1..50)
       expect{subject.top_up(value)}.to change{subject.balance}.by(value)
     end
+    it 'does not permit @balance to go beyond £90' do
+      value = 100
+      expect{subject.top_up(value)}.to raise_error("Value exceeds maximum allowed")
+    end
 
   end
 
