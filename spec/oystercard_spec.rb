@@ -13,7 +13,7 @@ describe Oystercard do
   describe "#top_up" do
 
     it 'adds money to the Oystercard @balance' do
-      expect(subject).to respond_to(:top_up)
+      expect(subject).to respond_to(:top_up).with(1).argument
     end
 
   end

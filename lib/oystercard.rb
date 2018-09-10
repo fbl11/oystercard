@@ -7,6 +7,7 @@ class Oystercard
   end
 
   def top_up
-    
+
   end
+  
 end
