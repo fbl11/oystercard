@@ -45,4 +45,10 @@ describe Oystercard do
     
   end
 
+  describe '#touch_out' do
+    it 'allows the user to touch out' do
+      expect(subject).to respond_to(:touch_out)
+    end
+  end
+
 end
