@@ -45,5 +45,5 @@ I need to touch in and out.
 require './lib/oystercard.rb'
 card = Oystercard.new
 card.touch_in
-card.in_journey?
 card.touch_out
+card.in_journey?

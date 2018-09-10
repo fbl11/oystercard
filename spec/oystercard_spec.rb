@@ -35,25 +35,24 @@ describe Oystercard do
 
   describe '#touch_in' do
 
-    it 'allows the user to touch in' do
-      expect(subject).to respond_to(:touch_in)
-    end
     it "changes @status of Oystercard to 'true' ('in journey')" do
-      subject.touch_in
-      expect(subject.status).to eq(true)
+      expect(subject.touch_in).to eq(true)
     end
     
   end
 
   describe '#touch_out' do
 
-    it 'allows the user to touch out' do
-      expect(subject).to respond_to(:touch_out)
+    it "changes @status of Oystercard to 'false' ('not in journey')" do
+      expect(subject.touch_out).to eq(false)
     end
 
-    it "changes @status of Oystercard to 'false' ('not in journey')" do
+  end
+
+  describe '#in_journey?' do
+    it 'shows whether a card is in journey' do
       subject.touch_in
-      expect(subject.status).to eq(false)
+      expect(subject.in_journey?).to be(true)
     end
 
   end
