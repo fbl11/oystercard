@@ -1,2 +1,3 @@
 Allow negative balance?
-Use floats?
+Use floats for balance?
+EDGECASE - Touch out / in multiple times in a row?
