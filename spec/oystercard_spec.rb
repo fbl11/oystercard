@@ -15,6 +15,10 @@ describe Oystercard do
     it 'adds money to the Oystercard @balance' do
       expect(subject).to respond_to(:top_up).with(1).argument
     end
+    it 'updates the balance when passed a value' do
+      subject.top_up(10)
+      expect(subject.balance).to eq(10)
+    end
 
   end
 

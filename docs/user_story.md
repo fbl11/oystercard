@@ -6,3 +6,5 @@ I want to add money to my card
 require './lib/oystercard.rb'
 card = Oystercard.new
 card.balance
+card.top_up(10)
+card.balance
