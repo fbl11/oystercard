@@ -27,3 +27,13 @@ require './lib/oystercard.rb'
 card = Oystercard.new
 card.top_up(100)
 card.balance
+
+In order to pay for my journey
+As a customer
+I need my fare deducted from my card
+
+# irb
+require './lib/oystercard.rb'
+card = Oystercard.new
+card.top_up(50)
+card.deduct_fare(5)
