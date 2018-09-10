@@ -37,3 +37,13 @@ require './lib/oystercard.rb'
 card = Oystercard.new
 card.top_up(50)
 card.deduct(5)
+
+In order to get through the barriers.
+As a customer
+I need to touch in and out.
+# irb
+require './lib/oystercard.rb'
+card = Oystercard.new
+card.touch_in
+card.in_journey?
+card.touch_out
