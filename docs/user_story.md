@@ -54,4 +54,4 @@ I need to have the minimum amount (£1) for a single journey.
 # irb
 require './lib/oystercard.rb'
 card = Oystercard.new
-card.touch_in
+card.touch_in # expects error message
