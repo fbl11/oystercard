@@ -25,23 +25,7 @@ describe Oystercard do
 
   end
 
-  # no longer needed because it's implicitly tested by 'touch out'
-  # describe '#deduct' do
-    
-  #   it 'reduces @balance by fare' do
-  #     fare = rand(1..5)
-  #     expect { oyster.deduct(fare) } .to change { oyster.balance }.by(-fare)
-  #   end
-
-  # end
-
   describe '#touch_in' do
-
-    # it "changes journey state to 'in journey' after touching in" do
-    #   oyster.touch_in
-    #   expect(oyster).to be_in_journey
-    # end
-    # moved to 'context minimum top up'
 
     it 'raises error when @balance is below MINIMUM_BALANCE' do
       expect { oyster.touch_in }.to raise_error("Cannot touch in: balance below £#{Oystercard::MINIMUM_BALANCE}")
@@ -65,29 +49,24 @@ describe Oystercard do
     end
 
     describe '#touch_in' do
+     
       it "changes journey state to 'in journey' after touching in" do
         oyster.touch_in
         expect(oyster).to be_in_journey
       end
-      # TESTS METHOD USING GETTER 'in_journey'
+
     end
 
-    # describe '#in_journey?' do
-    #   THESE TESTS ARE NOT NECESSARY BECAUSE THEY ESSENTIALLY ONLY TEST A GETTER - USE FOR TOUCH IN/OUT INSTEAD 
-    #   it 'shows an Oyster to be in journey after touching in' do
-    #     oyster.touch_in
-    #     expect(oyster).to be_in_journey
-    #   end
-  
-    #   it 'shows an Oyster not to be in journey after touching out' do
-    #     oyster.touch_in
-    #     oyster.touch_out
-    #     expect(oyster).not_to be_in_journey
-    #   end
-  
-  
-    # end
+    describe '#touch_out' do
 
+      it "changes journey state to 'not in journey' after touching in" do
+        oyster.touch_in
+        oyster.touch_out
+        expect(oyster).not_to be_in_journey
+      end
+
+    end
+  
   end
 
 end

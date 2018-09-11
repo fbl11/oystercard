@@ -11,7 +11,7 @@ class Oystercard
   end
 
   def top_up(amount)
-    fail "Cannot top up: exceeds cap of £#{MAXIMUM_BALANCE}" if amount + @balance > MAXIMUM_BALANCE
+    fail "Cannot top up: exceeds cap of £#{MAXIMUM_BALANCE}" if above_cap?(amount)
     @balance += amount
   end
 
@@ -31,10 +31,9 @@ class Oystercard
 
   private
   
-  # does using this make the code more legible?
-  # def above_maximum?(amount)
-  #   amount + balance > MAXIMUM_BALANCE
-  # end
+  def above_cap?(amount)
+    amount + balance > MAXIMUM_BALANCE
+  end
 
   def below_minimum?
     balance < MINIMUM_BALANCE
