@@ -8,9 +8,9 @@ class Oystercard
     @in_journey = false
   end
 
-  def top_up(value)
-    fail "Value exceeds maximum allowed: #{MAXIMUM_BALANCE}" if value + @balance > MAXIMUM_BALANCE
-    @balance += value
+  def top_up(amount)
+    fail "Cannot top up: exceeds cap of £#{MAXIMUM_BALANCE}" if amount + @balance > MAXIMUM_BALANCE
+    @balance += amount
   end
 
   def deduct(fare)
@@ -28,5 +28,10 @@ class Oystercard
   def in_journey?
     @in_journey
   end
+
+  private
+  # def at_cap?
+    
+  # end
 
 end
