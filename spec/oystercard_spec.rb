@@ -38,17 +38,17 @@ describe Oystercard do
 
     it 'deducts the minimum fare from Oyster' do
       fare = Oystercard::MINIMUM_FARE
-      expect { oyster.touch_out }.to change { oyster.balance }.by(-fare)
+      expect { oyster.touch_out(station) }.to change { oyster.balance }.by(-fare)
     end
 
   end
 
 
 
-  context 'Oyster is topped up to MINIMUM BALANCE' do
+  context 'Oyster is topped up to MAXIMUM BALANCE' do
 
     before :each do
-      oyster.top_up(Oystercard::MINIMUM_BALANCE)
+      oyster.top_up(Oystercard::MAXIMUM_BALANCE)
     end
 
     describe '#touch_in' do
@@ -58,29 +58,44 @@ describe Oystercard do
         expect(oyster).to be_in_journey
       end
 
-      it 'stores the station where the card is touched in' do
+      it 'can be passed the station name as an argument' do
+        expect(oyster).to respond_to(:touch_in).with(1).argument
+      end
+
+      it 'stores the entry station where the card is touched in' do
         oyster.touch_in(station)
         expect(oyster.station).to eq(station)
       end
 
-      it 'can be passed the station name as an argument' do
-        expect(oyster).to respond_to(:touch_in).with(1).argument
-      end
       describe 'history' do
 
-        it 'displays the history of journeys on the card' do
+        it 'shows an empty history for a new oyster card' do
+          expect(oyster.history).to be_empty
+        end
+
+        it 'shows the entry station and exit station for a single journey stored on the oyster card' do
           oyster.touch_in(station)
           oyster.touch_out(station)
-          expect(oyster.history).to eq history
+          expect(oyster.history).to eq([ {entry: station, exit: station} ])
         end
+
+        it 'shows the entry station and exit station for each journey stored on the oyster card' do
+          oyster.touch_in(station)
+          oyster.touch_out(station)
+          oyster.touch_in(station)
+          oyster.touch_out(station)
+          expect(oyster.history).to eq([ { entry: station, exit: station }, { entry: station, exit: station } ])
+        end
+
       end
+
     end
 
     describe '#touch_out' do
 
       before :each do
         oyster.touch_in(station)
-        oyster.touch_out
+        oyster.touch_out(station)
       end
 
       it "changes journey state to 'not in journey' after touching out" do
