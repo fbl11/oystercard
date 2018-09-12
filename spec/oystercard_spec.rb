@@ -69,16 +69,17 @@ describe Oystercard do
 
     describe '#touch_out' do
 
-      it "changes journey state to 'not in journey' after touching out" do
+      before :each do
         oyster.touch_in(station)
         oyster.touch_out
+      end
+
+      it "changes journey state to 'not in journey' after touching out" do
         expect(oyster).not_to be_in_journey
       end
 
-      it 'sets station back to nil' do
-        oyster.touch_in(station)
-        oyster.touch_out
-        expect(oyster.station).to be(nil)   
+      it 'deletes station saved on card' do
+        expect(oyster.station).to be(nil)
       end
 
     end
