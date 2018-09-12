@@ -68,3 +68,18 @@ card.touch_in(station)
 card.station #return station
 card.touch_out
 card.station #return nil
+
+In order to know where I have been
+As a customer
+I want to see all my previous trips
+#irb
+require './lib/oystercard.rb'
+require './lib/station.rb'
+card = Oystercard.new
+card.top_up(5)
+station = Station.new
+card.touch_in(station)
+card.station
+card.touch_out
+card.station
+card.journeys 

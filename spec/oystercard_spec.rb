@@ -43,6 +43,8 @@ describe Oystercard do
 
   end
 
+
+
   context 'Oyster is topped up to MINIMUM BALANCE' do
 
     before :each do
@@ -64,7 +66,14 @@ describe Oystercard do
       it 'can be passed the station name as an argument' do
         expect(oyster).to respond_to(:touch_in).with(1).argument
       end
+      describe 'history' do
 
+        it 'displays the history of journeys on the card' do
+          oyster.touch_in(station)
+          oyster.touch_out(station)
+          expect(oyster.history).to eq history
+        end
+      end
     end
 
     describe '#touch_out' do
