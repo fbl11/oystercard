@@ -4,7 +4,7 @@ describe Oystercard do
   subject(:oyster) { described_class.new }
 
   describe "#balance" do
-    
+
     it 'returns an initial @balance of 0' do
       expect(oyster.balance).to eq(0)
     end
@@ -30,34 +30,39 @@ describe Oystercard do
     it 'raises error when @balance is below MINIMUM_BALANCE' do
       expect { oyster.touch_in }.to raise_error("Cannot touch in: balance below £#{Oystercard::MINIMUM_BALANCE}")
     end
-    
+
   end
 
   describe '#touch_out' do
 
     it 'deducts the minimum fare from Oyster' do
       fare = Oystercard::MINIMUM_FARE
-      expect { oyster.touch_out }.to change { oyster.balance }.by(-fare)    
+      expect { oyster.touch_out }.to change { oyster.balance }.by(-fare)
     end
 
   end
 
   context 'Oyster is topped up to MINIMUM BALANCE' do
-    
+
     before :each do
       oyster.top_up(Oystercard::MINIMUM_BALANCE)
     end
 
     describe '#touch_in' do
-     
+
       it "changes journey state to 'in journey' after touching in" do
-        oyster.touch_in
+        oyster.touch_in(station)
         expect(oyster).to be_in_journey
       end
 
       it 'stores the station where the card is touched in' do
-        oyster.touch_in
+        oyster.touch_in(station)
+        station = "Station name"
         expect(oyster.station).to eq(station)
+      end
+
+      it 'can be passed the station name as an argument' do
+        expect(oyster).to respond_to(:touch_in).with(1).argument
       end
 
     end
@@ -71,7 +76,7 @@ describe Oystercard do
       end
 
     end
-  
+
   end
 
 end

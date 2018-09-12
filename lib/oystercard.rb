@@ -1,6 +1,6 @@
 class Oystercard
 
-  attr_reader :balance
+  attr_reader :balance, :station
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
   MINIMUM_FARE = 1
@@ -8,6 +8,7 @@ class Oystercard
   def initialize
     @balance = 0
     @in_journey = false
+    @station = "Station name"
   end
 
   def top_up(amount)
@@ -15,7 +16,7 @@ class Oystercard
     @balance += amount
   end
 
-  def touch_in
+  def touch_in(station)
     raise "Cannot touch in: balance below £#{MINIMUM_BALANCE}" if below_minimum?
     @in_journey = true
   end
@@ -29,8 +30,12 @@ class Oystercard
     @in_journey
   end
 
+
+
+
+
   private
-  
+
   def above_cap?(amount)
     amount + balance > MAXIMUM_BALANCE
   end
