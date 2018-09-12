@@ -55,11 +55,16 @@ describe Oystercard do
         expect(oyster).to be_in_journey
       end
 
+      it 'stores the station where the card is touched in' do
+        oyster.touch_in
+        expect(oyster.station).to eq(station)
+      end
+
     end
 
     describe '#touch_out' do
 
-      it "changes journey state to 'not in journey' after touching in" do
+      it "changes journey state to 'not in journey' after touching out" do
         oyster.touch_in
         oyster.touch_out
         expect(oyster).not_to be_in_journey
