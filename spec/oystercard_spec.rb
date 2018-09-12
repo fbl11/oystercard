@@ -2,6 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
   subject(:oyster) { described_class.new }
+  let(:station) { double :station }
 
   describe "#balance" do
 
@@ -28,7 +29,7 @@ describe Oystercard do
   describe '#touch_in' do
 
     it 'raises error when @balance is below MINIMUM_BALANCE' do
-      expect { oyster.touch_in }.to raise_error("Cannot touch in: balance below £#{Oystercard::MINIMUM_BALANCE}")
+      expect { oyster.touch_in(station)}.to raise_error("Cannot touch in: balance below £#{Oystercard::MINIMUM_BALANCE}")
     end
 
   end
@@ -57,7 +58,6 @@ describe Oystercard do
 
       it 'stores the station where the card is touched in' do
         oyster.touch_in(station)
-        station = "Station name"
         expect(oyster.station).to eq(station)
       end
 
@@ -70,9 +70,15 @@ describe Oystercard do
     describe '#touch_out' do
 
       it "changes journey state to 'not in journey' after touching out" do
-        oyster.touch_in
+        oyster.touch_in(station)
         oyster.touch_out
         expect(oyster).not_to be_in_journey
+      end
+
+      it 'sets station back to nil' do
+        oyster.touch_in(station)
+        oyster.touch_out
+        expect(oyster.station).to be(nil)   
       end
 
     end

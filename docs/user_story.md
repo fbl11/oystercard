@@ -55,3 +55,16 @@ I need to have the minimum amount (£1) for a single journey.
 require './lib/oystercard.rb'
 card = Oystercard.new
 card.touch_in # expects error message
+
+In order to pay for my journey
+As a customer
+I need to know where I've travelled from
+# irb
+require './lib/oystercard.rb'
+card = Oystercard.new
+card.top_up(5)
+station = Station.new
+card.touch_in(station)
+card.station #return station
+card.touch_out
+card.station #return nil
