@@ -1,7 +1,11 @@
 class Journey
 
-  attr_reader :entry_station, :exit_station
+  attr_reader :exit_station
+  attr_accessor :entry_station
+
   MINIMUM_FARE = 1
+
+
 
   def start_journey(entry_station)
     @entry_station = entry_station
@@ -13,6 +17,10 @@ class Journey
 
   def charge_journey
     MINIMUM_FARE
+  end
+
+  def in_journey?
+    entry_station
   end
 
 
