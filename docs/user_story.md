@@ -90,3 +90,10 @@ I want to know what zone a station is in
 #irb
 require './lib/oystercard.rb'
 require './lib/station.rb'
+Bank = Station.new('Bank', 1)
+Bank.name
+Bank.zone
+
+In order to be charged correctly
+As a customer
+I need a penalty charge deducted if I fail to touch in or out
