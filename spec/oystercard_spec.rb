@@ -38,14 +38,14 @@ describe Oystercard do
     describe '#touch_out' do
   
       it 'deducts the minimum fare from Oyster' do
-        fare = Oystercard::MINIMUM_FARE
+        fare = Journey::MINIMUM_FARE
         expect { oyster.touch_out(station) }.to change { oyster.balance }.by(-fare)
       end
   
     end
   
   end
-  
+
 
   context 'Oyster is topped up to MAXIMUM BALANCE' do
 

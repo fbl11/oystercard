@@ -5,9 +5,10 @@ class Oystercard
   MINIMUM_BALANCE = 1
   MINIMUM_FARE = 1
 
-  def initialize
+  def initialize(journey = Journey.new)
     @balance = 0
     @history = []
+    @journey = journey
   end
 
   def top_up(amount)
@@ -17,12 +18,14 @@ class Oystercard
 
   def touch_in(station)
     raise "Cannot touch in: balance below £#{MINIMUM_BALANCE}" if below_minimum?
+    @journey.start_journey(station)
     @station = station
   end
 
   def touch_out(exit_station)
-    deduct(MINIMUM_FARE)
-    @history << { :entry => station, :exit => exit_station }
+    deduct
+    @journey.end_journey(station)
+    @history << { :entry => @journey.entry_station, :exit => @journey.exit_station }
     @station = nil
   end
 
@@ -41,8 +44,8 @@ class Oystercard
     balance < MINIMUM_BALANCE
   end
 
-  def deduct(fare)
-    @balance -= fare
+  def deduct
+    @balance -= @journey.charge_journey
   end
 
 end
