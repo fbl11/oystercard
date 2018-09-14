@@ -1,27 +1,26 @@
 class Journey
 
-  attr_reader :exit_station
-  attr_accessor :entry_station
+  attr_reader :exit_station, :entry_station
+  # attr_accessor :entry_station
 
   MINIMUM_FARE = 1
+  PENALTY_FARE = 6
 
-
-
-  def start_journey(entry_station)
+  def initialize(entry_station = nil)
     @entry_station = entry_station
   end
-
-  def end_journey(exit_station)
+ 
+  def end_at(exit_station = nil)
     @exit_station = exit_station
   end
 
-  def charge_journey
-    MINIMUM_FARE
+  def calculate_fare
+    return MINIMUM_FARE if complete?
+    PENALTY_FARE
   end
 
-  def in_journey?
-    entry_station
+  def complete?
+    entry_station && exit_station
   end
-
 
 end
